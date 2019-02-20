@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="./js/bundle.js"></script>
+	<link rel="stylesheet" href="./css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+	<title>W7D2-HW</title>
+</head>
+<body>
+	<h1>PUNK API</h1>
+	<div id="app">
+
+		<label for="brew_select"></label>
+		<select id="brew_select" v-on:change="brewSelect" v-model="selectedIndex">
+			<option value="">Please choose a brew</option>
+			<option v-for="(brew, index) in brews" :value="index">{{ brew.name }}</option>
+		</select>
+
+		<div id="selected_brew" v-if="selectedBrew">
+			<h3>{{ selectedBrew.name }}</h3>
+			<p>{{ selectedBrew.description }}</p>
+			<h5>Hops:</h5>
+			<p for v-for="hops in selectedBrew.ingredients.hops">{{ hops.name }}</p>
+			<p for v-for="malts in selectedBrew.ingredients.malts">{{ hops.name }}</p>
+			<p><img height="300px" width="120px" :alt = 'selectedBrew.name' :src = 'selectedBrew.image_url'/></p>
+			<button class="btn" v-on:click="addFavourite">Add to faves</button>
+		</div>
+
+		<div id="selected_brew" v-for="brew in favouriteBrews">
+			<span><h3>{{ brew.name }}</h3></span>
+			<span><button class="btn" v-on:click="deleteFavourite">Delete from faves</button></span>
+		</div>
+
+	</div>
+
+</div>
+</body>
+</html>
